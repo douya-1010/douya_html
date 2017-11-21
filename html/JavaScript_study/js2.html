@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学习js的函数（2）</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        #div1 {
+            width: 200px; height: 200px; background-color: red;
+        }
+    </style>
+    <script>
+        function toGreen() {
+            var oDiv=document.getElementById('div1');
+            oDiv.style.width='300px';
+            oDiv.style.height='300px';
+            oDiv.style.backgroundColor='blue';
+        }
+        function toRed() {
+            var oDiv=document.getElementById('div1');
+            oDiv.style.width='200px';
+            oDiv.style.height='200px';
+            oDiv.style.backgroundColor='red';    
+        }
+
+        function show() {
+            alert('js函数的学习知识')        
+        } //函数的定义
+        show() //函数的调用
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="div1"  onmouseover="toGreen()" onmouseout="toRed()">
+        </div>
+
+    </div>
+
+    <textarea name="" id="" cols="120" rows="80">
+    js（2）：学习函数部分的知识点：
+        1.新建一个div1，然后设置号高宽以及颜色，当点击这个div的时候，大小颜色等都跟着变化
+        2.当鼠标移入的时候这个div的时候变大，背景变为绿色；
+        写法1：
+        样式：
+            #div1 {
+                width: 200px; height: 200px; background-color: red;
+            }
+        代码：
+            <div id="div1" 
+            onmouseover="
+            document.getElementById('div1').style.width='300px';
+            document.getElementById('div1').style.height='300px';
+            document.getElementById('div1').style.backgroundColor='blue';"
+            onmouseout="
+            document.getElementById('div1').style.width='200px';
+            document.getElementById('div1').style.height='200px';
+            document.getElementById('div1').style.backgroundColor='red';">
+
+            </div>
+            <!--
+                第一种写法的代码就是按照我之前学习的来写的，然后这种写法太累赘
+                其中有太多的重复相似的代码语句。
+
+                总结来说的话就是：功能完成了，写法太累赘。
+            -->
+        
+        写法2：
+        script里的代码：
+        <script>
+            function toGreen() {
+                // 格式和class很像
+                document.getElementById('div1').style.width='300px';
+                document.getElementById('div1').style.height='300px';
+                document.getElementById('div1').style.backgroundColor='blue';
+            }
+            function toRed() {
+                document.getElementById('div1').style.width='200px';
+                document.getElementById('div1').style.height='200px';
+                document.getElementById('div1').style.backgroundColor='red';    
+            }
+        </script>
+        代码：
+            <div id="div1"  onmouseover="toGreen()" onmouseout="toRed()">
+            </div>
+
+        <!-- 
+            写法2和写法1表达的是同样的效果；但是写法是写在script里的，行间只用写函数就少了，在script里定义function
+            js函数跟css里的class有点相像。
+            在写css的时候我， 有个习惯，就是重用：
+
+
+            接下来就是把相同，相似的来合并了
+        -->
+        写法3：
+        script里的代码：
+        <script>
+            function toGreen() {
+                var oDiv=document.getElementById('div1');
+                oDiv.style.width='300px';
+                oDiv.style.height='300px';
+                oDiv.style.backgroundColor='blue';
+            }
+            function toRed() {
+                var oDiv=document.getElementById('div1');
+                oDiv.style.width='200px';
+                oDiv.style.height='200px';
+                oDiv.style.backgroundColor='red';    
+            }
+        </script>
+        代码：
+            <div id="div1"  onmouseover="toGreen()" onmouseout="toRed()">
+            </div>
+
+        <!-- 
+            引入变量var  把相同的部分合并了，减少多余的书写 
+            函数的基本格式：
+            function 函数名() {
+                
+            }
+            函数名可以随便写：但是可读性要高
+            变量：把这个想为别名，见到这个就如见到本人
+        -->
+    再来一个例子：将函数的定义与调用：
+    <script>
+        function show() {
+            alert('js函数的学习知识')        
+        } //函数的定义
+        show() //函数的调用
+        /* 
+            如果一个函数只被定义了，是不会执行的，要调用函数才会执行
+            比如这里的show()就是函数的调用
+            上面的几种写法种的toGreen()和toRed()也是函数的调用
+            如果写成：
+            function show() {
+                alert('js函数的学习知识')        
+            } 
+            这个函数是不会执行的。
+            还有要注意一点：就是执行的时候也是要记住写后面的小括号的，学到后面就能理解为什么了！ 
+            只有调用也是不行的，必须要定义还有调用才能实现js的功能     
+        */
+    </script>
+        
+    js(3):学习网页的换肤的实现原理：
+    </textarea>
+    
+</body>
+</html>

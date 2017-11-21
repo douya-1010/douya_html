@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>理解子节点，还有一些兼容性问题：</title>
+    <script>
+        window.onload=function() {
+            var oUl1=document.getElementById('ul1');
+            /*
+            // alert(oUl1.childNodes.length);
+            for(var i=0; i<oUl1.childNodes.length; i++) {
+                // alert(oUl1.nodeType);        我sb了，我这样写永远是检测出的哦Ul的nodetype啊。。。
+                alert(oUl1.childNodes[i].nodeType);
+            }
+            */
+            for(var i=0; i<oUl1.childNodes.length; i++) {
+                if(oUl1.childNodes[i].nodeType==1) {
+                    oUl1.childNodes[i].style.background='red';
+                    // childNodes[i].style.background='red';    我之前就这样写了，然后怎么也找不到错误。。。
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul id="ul1"> 
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <textarea name="" id="" cols="120" rows="45">
+        <script>
+            window.onload=function() {
+                var oUl1=document.getElementById('ul1');
+                alert(oUl1.childNodes.length);
+            }
+        </script>
+        <ul id="ul1"> 
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <!-- 结果弹出的是11而不是5，在低版本的ie678弹出的却是5.因为高版本的把文本节点也包括到了子节点里 -->
+        nodeType:js里所有的标签都有一个nodetype的，就是一种类型
+        【检查标签的nodetype:】
+            <script>
+                window.onload=function() {
+                    var oUl1=document.getElementById('ul1');
+                    // alert(oUl1.childNodes.length);
+                    for(var i=0; i<oUl1.childNodes.length; i++) {
+                        // alert(oUl1.nodeType);        我sb了，我这样写永远是检测出的哦Ul的nodetype啊。。。
+                        alert(oUl1.childNodes[i].nodeType);
+                    }
+                }
+                // 从这里可以得出，文本节点的nodetype为3，元素节点的nodetype为1
+            </script>
+        让所有的li变为红色：
+        <SCript>
+            window.onload=function() {
+                var oUl1=document.getElementById('ul1');
+                /*
+                // alert(oUl1.childNodes.length);
+                for(var i=0; i<oUl1.childNodes.length; i++) {
+                    // alert(oUl1.nodeType);        我sb了，我这样写永远是检测出的哦Ul的nodetype啊。。。
+                    alert(oUl1.childNodes[i].nodeType);
+                }
+                */
+                for(var i=0; i<oUl1.childNodes.length; i++) {
+                    if(oUl1.childNodes[i].nodeType==1) {
+                        oUl1.childNodes[i].style.background='red';
+                        // childNodes[i].style.background='red';    我之前就这样写了，然后怎么也找不到错误。。。
+                    };
+                }
+            }
+        </script>
+        还有一种写法，直接就把里面的li找出来了
+            <SCript>
+                window.onload=function() {
+                    var oUl1=document.getElementById('ul1');
+                    for(var i=0; i<oUl1.children.length; i++) {
+                            oUl1.children[i].style.background='red';
+                    }
+                }
+            </script>
+            children只包括元素，不包括文本，还没有兼容性问题
+    </textarea>
+</body>
+</html>

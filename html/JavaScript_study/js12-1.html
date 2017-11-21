@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>制作数码时钟</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10 auto;
+        }
+        .div1{
+            text-align: center; background: #ccc; color: black; 
+        }
+    </style>
+    <script>
+        /*
+        var oDate=new Date();
+        // new 其实就是用来创建对象的，好像之后会学到
+        alert(oDate.getHours());        //得到当前的小时
+        alert(oDate.getMinutes());      //得到当前的分钟
+        alert(oDate.getSeconds());      //得到当前的秒钟
+        */
+        window.onload=function() {
+            var aImg=document.getElementsByTagName('img');
+            var str='14'
+        }
+        
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="div1">
+            <img src="../../images/shuma/0.png" alt="">
+            <img src="../../images/shuma/1.png" alt="">
+            :
+            <img src="../../images/shuma/2.png" alt="">
+            <img src="../../images/shuma/3.png" alt="">
+            :
+            <img src="../../images/shuma/4.png" alt="">
+            <img src="../../images/shuma/5.png" alt="">
+        </div>
+        <!-- 
+            思路：改变图片位置的编号
+            问题：
+                1.要怎样获取到当前的时间呢？
+                    Date对象的用法：
+                2.如何用js修改这些图片的路径
+         -->
+    </div>
+</body>
+</html>

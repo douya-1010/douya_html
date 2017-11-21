@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>重写之前写过的选项卡的知识</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        #div1-2 div {
+            width: 230px; min-height: 200px; background: #ccc;margin-top: 10px;
+            display: none;
+        }
+        .active {
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        window.onload=function() {
+            
+            var oDiv1=document.getElementById('div1-1');
+            var aBtn=oDiv1.getElementsByTagName('input');   //为了选出所有的按钮
+            var oDiv2=document.getElementById('div1-2');
+            var aDiv=oDiv2.getElementsByTagName('div');     //为了选出所有的div
+            for(var i=0; i<aBtn.length; i++) {      //选中所有的按钮
+                aBtn[i].douya=i;  
+                //用js给按钮自定义一个属性，让这个属性等于编号；当我把按钮的这个属性给div的时候，就相应的出现div了
+                //还有这属性要在设置循环这个位置加，不然也不行,写法必须像上面这样写[i]这个也不能忘了
+                aBtn[i].onclick=function() {        //我在写这里的时候，忘了加[i]，导致错误是，根本无法加事件   
+                    for(var i=0; i<aBtn.length; i++) {
+                        aBtn[i].className='';
+                        aDiv[i].style.display='none';
+                    }                               //做这个for循环的目的是为了让点击this之前，所有的div的class为空
+                                                    //以及把所有的div在显示点击之前都隐藏掉
+                    this.className='active';        //这一步的目的是点击哪一个哪个个的样式就变为设置的class样式  
+                    aDiv[this.douya].style.display='block';
+                    // aDiv[aBtn.douya].style.display='block';   错误写法：之前都没找到错在哪里  
+                    /*之前自定义了一个属性douya=i的，所有，当aBtn[i]的i为多少的时候，aBtn.douya就是多少，
+                    自然的aDiv[i]中的i就等于了aBtn[i]中的i了，自然就对应起来了*/
+                };
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="div1">
+            <div id="div1-1">
+                <input type="button" value=" 新闻" class="active">
+                <input type="button" value=" 热点">
+                <input type="button" value=" 推荐">
+                <input type="button" value=" 科技">
+            </div>
+            <div id="div1-2">
+                <div style="display:block;">新闻</div>
+                <div>热点</div>
+                <div>推荐</div>
+                <div>科技</div>
+            </div>
+        </div>
+    </div>
+    <textarea name="" id="" cols="120" rows="30">
+        第一步，进行结构的布局：
+        <style>
+            #div1-2 div {
+                width: 230px; min-height: 200px; background: #ccc;margin-top: 10px;
+                display: none;
+            }
+            .active {
+                background-color: yellow;
+            }
+        </style>
+        <body>
+            <div class="div1">
+                <div id="div1-1">
+                    <input type="button" value=" 新闻" class="active">
+                    <input type="button" value=" 热点">
+                    <input type="button" value=" 推荐">
+                    <input type="button" value=" 科技">
+                </div>
+                <div id="div1-2">
+                    <div style="display:block;">新闻</div>
+                    <div>热点</div>
+                    <div>推荐</div>
+                    <div>科技</div>
+                </div>
+            </div>  
+        </body>
+        第二步：开始写js代码
+            上边按钮变色的代码：
+                <script>
+                    window.onload=function() {
+                        
+                        var oDiv1=document.getElementById('div1-1');
+                        var aBtn=oDiv1.getElementsByTagName('input');
+                        var oDiv2=document.getElementById('div1-2');
+                        var aDiv=oDiv2.getElementsByTagName('div');
+                        for(var i=0; i<aBtn.length; i++) {      //选中所有的按钮
+                            aBtn[i].onclick=function() {        //我在写这里的时候，忘了加[i]，导致错误是，根本无法加事件
+                                for(var i=0; i<aBtn.length; i++) {
+                                    aBtn[i].className='';
+                                }                               //做这个for循环的目的是为了让点击this之前，所有的div的class为空
+                                this.className='active';        //这一步的目的是点击哪一个哪个个的样式就变为设置的class样式   
+                            };
+                        }
+                    }
+                </script>
+            下边随之变换div的写法：
+                <script>
+                    window.onload=function() {
+                        
+                        var oDiv1=document.getElementById('div1-1');
+                        var aBtn=oDiv1.getElementsByTagName('input');   //为了选出所有的按钮
+                        var oDiv2=document.getElementById('div1-2');
+                        var aDiv=oDiv2.getElementsByTagName('div');     //为了选出所有的div
+                        for(var i=0; i<aBtn.length; i++) {      //选中所有的按钮
+                            aBtn[i].douya=i;  
+                            //用js给按钮自定义一个属性，让这个属性等于编号；当我把按钮的这个属性给div的时候，就相应的出现div了
+                            //还有这属性要在设置循环这个位置加，不然也不行,写法必须像上面这样写[i]这个也不能忘了
+                            aBtn[i].onclick=function() {        //我在写这里的时候，忘了加[i]，导致错误是，根本无法加事件   
+                                for(var i=0; i<aBtn.length; i++) {
+                                    aBtn[i].className='';
+                                    aDiv[i].style.display='none';
+                                }                               //做这个for循环的目的是为了让点击this之前，所有的div的class为空
+                                                                //以及把所有的div在显示点击之前都隐藏掉
+                                this.className='active';        //这一步的目的是点击哪一个哪个个的样式就变为设置的class样式  
+                                aDiv[this.douya].style.display='block';
+                                // aDiv[aBtn.douya].style.display='block';   错误写法：之前都没找到错在哪里  
+                                /*之前自定义了一个属性douya=i的，所有，当aBtn[i]的i为多少的时候，aBtn.douya就是多少，
+                                自然的aDiv[i]中的i就等于了aBtn[i]中的i了，自然就对应起来了*/
+                            };
+                        }
+                    }
+                </script>
+            总结一下这个写法中要注意的：
+                1.在自定义元素的时候的写法，写在第一个for循环之后，为所有的btn加上序号所有要写成aBtn[i]
+                2.还有最后在用这个序号的时候是写成[this.douya]而不是[aBtn.douya]，后者是没有被定义的，前者才是正确的，当前btn的douya属性
+                3.就是清空元素的时候的写法，就是在onclick里再加一个循环再全部清空。
+
+    </textarea>
+    
+</body>
+</html>

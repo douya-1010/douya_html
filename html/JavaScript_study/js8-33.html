@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>重写一遍简易日历的知识点</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        #div1-1 .active {
+            background-color: red;
+        }
+        br {
+            margin: 0; padding: 0;
+        }
+        ul,li {
+            list-style: none; text-align: center; margin: 0; padding: 0;
+        }
+        #div1-1 li {
+            width: 50px; height: 50px; margin: 10px 0 0 10px; background: #ccc;
+            position: relative; float: left;
+            line-height: 50px;
+        }
+        .div1 {
+            width: 190px; min-height: 300px; float: left;
+        }
+        #div1-1 {
+            position: relative; 
+            width: 190px; height: 250px;
+        }
+        #div1-2 {
+            position: relative; 
+            width: 100%; min-height: 100px;
+            box-sizing: border-box; padding: 10px;
+            background: #ccc;
+        }
+        #div1-2 h4,p {
+            margin: 5px; padding: 5px;
+        }
+        #div1-3 {
+            display: none;
+        }
+
+    </style>
+    <script>
+        window.onload=function() {
+            var oDiv1=document.getElementById('div1-1');
+            var aLi=oDiv1.getElementsByTagName('li');
+            var oDiv2=document.getElementById('div1-2');
+            var oDiv3=document.getElementById('div1-3');
+            var aLi1=oDiv3.getElementsByTagName('li');
+            for(var i=0; i<aLi.length; i++) {
+                aLi[i].douya=i;
+                aLi[i].onmouseover=function() {     //写事件是on开头的。。。刚才写错一直没找出原因；
+                    for(var i=0; i<aLi.length; i++) {
+                        aLi[i].className='';
+                    }       //清空之前的样式
+                    this.className='active';
+                    oDiv2.innerHTML="<h4>"+ (this.douya+1) + "月的活动</h4><br><p>"+ aLi1[this.douya].innerHTML +"</p>";        
+                };
+                
+            };
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="div1">
+            <div id="div1-1">
+                <li class="active">1月</li>
+                <li>2月</li>
+                <li>3月</li>
+                <li>4月</li>
+                <li>5月</li>
+                <li>6月</li>
+                <li>7月</li>
+                <li>8月</li>
+                <li>9月</li>
+                <li>10月</li>
+                <li>11月</li>
+                <li>12月</li>
+            </div>
+            <div id="div1-2">
+                <h4>1月的活动</h4><br>
+                <p>1月的节日</p>
+            </div>
+            <div id="div1-3">
+                <li>1月的节日</li>
+                <li>2月需要做什么事情呢</li>
+                <li>3月是播种的季节</li>
+                <li>4月需要做些什么呢</li>
+                <li>5月有劳动节哦</li>
+                <li>6月你只知道有儿童节吧</li>
+                <li>7月建党节</li>
+                <li>8月建军节</li>
+                <li>9月有教师节</li>
+                <li>10月不知道有什么节日</li>
+                <li>11月你喜欢的光棍节</li>
+                <li>12月表示这一年要结束啦</li>
+            </div>
+        </div>
+        
+
+    </div>
+    <textarea name="" id="" cols="120" rows="45">
+    制作简易日历：
+    第一步：页面的布局，
+        <body>
+            <div class="div1">
+                <div id="div1-1">
+                    <li class="active">1月</li>
+                    <li>2月</li>
+                    <li>3月</li>
+                    <li>4月</li>
+                    <li>5月</li>
+                    <li>6月</li>
+                    <li>7月</li>
+                    <li>8月</li>
+                    <li>9月</li>
+                    <li>10月</li>
+                    <li>11月</li>
+                    <li>12月</li>
+                </div>
+                <div id="div1-2"></div>
+            </div>
+        </body>
+        <style>
+            #div1-1 .active {
+                background-color: red;
+            }
+            /* 
+            这里要注意一个问题，我把下面li的写法改为了#div1-1 li 的时候，这里也要改 ，
+            也要加上#div1-1， 不然的话active中的background的优先级比不过下面的
+            #div1-1 li的优先级。
+            */
+            ul,li {
+                list-style: none; text-align: center; margin: 0; padding: 0;
+            }
+            #div1-1 li {
+                width: 50px; height: 50px; margin: 10px 0 0 10px; background: #ccc;
+                position: relative; float: left;
+                line-height: 50px;
+            }
+            .div1 {
+                width: 190px; min-height: 300px; margin: 0 auto;
+            }
+            #div1-1 {
+                position: relative; 
+                width: 190px; height: 250px;
+            }
+            #div1-2 {
+                position: relative; 
+                width: 100%; min-height: 100px;
+                box-sizing: border-box; padding: 10px;
+                background: #ccc;
+            }
+        </style>
+    第二步：写js代码：
+        月份样式的js代码：
+            <script>
+                window.onload=function() {
+                    var oDiv1=document.getElementById('div1-1');
+                    var aLi=oDiv1.getElementsByTagName('li');
+                    var oDiv2=document.getElementById('div1-2');
+                    var oDiv3=document.getElementById('div1-3');
+                    var aLi1=oDiv3.getElementsByTagName('li');
+
+                    for(var i=0; i<aLi.length; i++) {
+                        aLi[i].douya=i;
+                        aLi[i].onmouseover=function() {     //写事件是on开头的。。。刚才写错一直没找出原因；
+                            for(var i=0; i<aLi.length; i++) {
+                                aLi[i].className='';
+                            }       //清空之前的样式
+                            this.className='active';
+                        };
+                    };
+                }
+            </script>
+    第三步：写最下面一个div文字改变的js：也是这个里面最难的，
+        首先要建立一个div来存放每个月想要显示的内容：
+            <div id="div1-3">
+                <li>1月的节日</li>
+                <li>2月需要做什么事情呢</li>
+                <li>3月是播种的季节</li>
+                <li>4月需要做些什么呢</li>
+                <li>5月有劳动节哦</li>
+                <li>6月你只知道有儿童节吧</li>
+                <li>7月建党节</li>
+                <li>8月建军节</li>
+                <li>9月有教师节</li>
+                <li>10月不知道有什么节日</li>
+                <li>11月你喜欢的光棍节</li>
+                <li>12月表示这一年要结束啦</li>
+            <style>
+                #div1-3 {
+                    display: none;
+                }    
+            </style>
+        改变文字的写法：
+            oDiv2.innerHTML="<h4>"+ (this.douya+1) + "月的活动</h4><br><p>"+ aLi1[this.douya].innerHTML +"</p>";        
+            var oDiv3=document.getElementById('div1-3');
+            var aLi1=oDiv3.getElementsByTagName('li');
+            这是js里创建的变量。
+        提示：我这里范了一个错误，我应该把这个数组的内容写在js里才对，我写在html里了，然后用了隐藏。这样反而不好，
+        导致我还要取把原来的css样式改了，浪费了很多事件，而且写在html里的话，html的文件也会变大，变相的增加了访问网站
+        会使用更多的流量。
+        还有就是我再命名的时候也是不知道怎么命名，还有就是中途做的时候，上面的哪个active的优先级哪里也要注意。
+        
+            
+    </textarea>
+</body>
+</html>

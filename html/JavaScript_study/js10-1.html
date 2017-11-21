@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试switch能否运行</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        .div1 {
+            position: relative; float: left; clear: left; margin: 10px;
+        }
+    </style>
+    <script>
+        window.onload=function() {
+            var oName=document.getElementById('name');
+            var oSex=document.getElementById('sex');
+            var oBtn=document.getElementById('btn1');
+            oBtn.onclick=function() {
+                var n=oName.value;
+                var s=oSex.value;
+                switch(s) {
+                    case '男':
+                        alert('尊敬的'+n+'先生，您好！');
+                        break;
+                    case '女':
+                        alert('尊敬的'+n+'女士，您好！');
+                        break;
+                    default:
+                        alert(n+'，您好');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="div1">
+            <h4>请输入你的姓名了性别</h4>
+            姓名:   <br>
+            <input id="name" type="text"> <br>
+            性别:    <br>
+            <input id="sex" type="text">    <br>
+            <input id="btn1" type="button" value="确定">
+        </div>
+    </div>
+    <textarea name="" id="" cols="120" rows="40">
+
+        测试switch语句是否能起作用：因为我再js10里写的switch被报错了
+        写法：
+            <script>
+                window.onload=function() {
+                    var oName=document.getElementById('name');
+                    var oSex=document.getElementById('sex');
+                    var oBtn=document.getElementById('btn1');
+                    oBtn.onclick=function() {
+                        var n=oName.value;
+                        var s=oSex.value;
+                        switch(s) {
+                            case '男':
+                                alert('尊敬的'+n+'先生，您好！');
+                                break;
+                            case '女':
+                                alert('尊敬的'+n+'女士，您好！');
+                                break;
+                            default:
+                                alert(n+'，您好');
+                        }
+                    }
+                }
+            </script>
+            <body>
+                <div class="div1">
+                    姓名:   <br>
+                    <input id="name" type="text"> <br>
+                    性别:    <br>
+                    <input id="sex" type="text">    <br>
+                    <input id="btn1" type="button" value="确定">
+                </div>
+            </body>
+
+    </textarea>
+</body>
+</html>

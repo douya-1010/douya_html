@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>做简易日历</title>
+        <meta charset="utf-8">
+        <style>
+        .active {
+            background-color: red;
+        }
+        li {
+            box-sizing: border-box;
+            width: 50px; height: 50px; background-color: gray; margin: 10px; 
+            position: relative; float: left;
+            list-style-type: none; list-style: none; text-align: center; line-height: 50px;
+        }
+        #ri {
+            position: relative; 
+            width: 210px;   margin: 100px; line-height: 10px;
+        }
+        #ri div {
+            position: absolute; top: 280px; z-index: 1;
+            width: 210px; height: 100px; background-color: gray; margin: 0; padding: 0;
+        }
+        h5, p {
+            margin: 2px; padding: 2px; 
+        }
+        </style>
+        <script>
+        window.onload=function() {
+            var oDiv=document.getElementById("ri");
+            var oBtn=oDiv.getElementsByTagName("li");
+            var oBiv=oDiv.getElementsByTagName("div")[0];
+            var arr=[
+                '1111111111111111111111',
+                '2222222222222222222222',
+                '3333333333333333333333',
+                '4444444444444444444444',
+                '5555555555555555555555',
+                '6666666666666666666666',
+                '7777777777777777777777',
+                '8888888888888888888888',
+                '9999999999999999999999',
+                '1010101010101010101010',
+                '11 11 11 11 11 11 11 11',
+                '12 12 12 12 12 12 12 12',
+            ]
+
+            for(var i=0;i<oBtn.length;i++) {
+                oBtn[i].douya=i;
+                oBtn[i].onmouseover=function() {
+                    for(var i=0;i<oBtn.length;i++) {
+                        oBtn[i].className="";
+                    }
+                    this.className="active";
+                    oBiv.innerHTML='<h5>' + (this.douya+1) + '月活动</h5><p>'+ arr[this.douya] +'</p>';
+                }
+            }
+
+        }
+        </script>
+    </head>
+    <body>
+        <div id="ri">
+            <li class="active">1月</li>
+            <li>2月</li>
+            <li>3月</li>
+            <li>4月</li>
+            <li>5月</li>
+            <li>6月</li>
+            <li>7月</li>
+            <li>8月</li>
+            <li>9月</li>
+            <li>10月</li>
+            <li>11月</li>
+            <li>12月</li>
+            <div>
+                <h5>1月活动</h5> 
+                <p>11111111111111111111</p>
+            </div>
+        </div>
+        <textarea name="" id="" cols="120" rows="20">
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                        <title>做简易日历</title>
+                        <meta charset="utf-8">
+                        <style>
+                        .active {
+                            background-color: red;
+                        }
+                        li {
+                            box-sizing: border-box;
+                            width: 50px; height: 50px; background-color: gray; margin: 10px; 
+                            position: relative; float: left;
+                            list-style-type: none; list-style: none; text-align: center; line-height: 50px;
+                        }
+                        #ri {
+                            position: relative; 
+                            width: 210px;   margin: 100px; line-height: 10px;
+                        }
+                        #ri div {
+                            position: absolute; top: 280px; z-index: 1;
+                            width: 210px; height: 100px; background-color: gray; margin: 0; padding: 0;
+                        }
+                        h5, p {
+                            margin: 2px; padding: 2px; 
+                        }
+                        </style>
+                        <script>
+                        window.onload=function() {
+                            var oDiv=document.getElementById("ri");
+                            var oBtn=oDiv.getElementsByTagName("li");
+                            var oBiv=oDiv.getElementsByTagName("div")[0];
+                            var arr=[
+                                '1111111111111111111111',
+                                '2222222222222222222222',
+                                '3333333333333333333333',
+                                '4444444444444444444444',
+                                '5555555555555555555555',
+                                '6666666666666666666666',
+                                '7777777777777777777777',
+                                '8888888888888888888888',
+                                '9999999999999999999999',
+                                '1010101010101010101010',
+                                '11 11 11 11 11 11 11 11',
+                                '12 12 12 12 12 12 12 12',
+                            ]
+                
+                            for(var i=0;i<oBtn.length;i++) {
+                                oBtn[i].douya=i;
+                                oBtn[i].onmouseover=function() {
+                                    for(var i=0;i<oBtn.length;i++) {
+                                        oBtn[i].className="";
+                                    }
+                                    this.className="active";
+                                    oBiv.innerHTML='<h5>' + (this.douya+1) + '月活动</h5><p>'+ arr[this.douya] +'</p>';
+                                }
+                            }
+                
+                        }
+                        </script>
+                    </head>
+                    <body>
+                        <div id="ri">
+                            <li class="active">1月</li>
+                            <li>2月</li>
+                            <li>3月</li>
+                            <li>4月</li>
+                            <li>5月</li>
+                            <li>6月</li>
+                            <li>7月</li>
+                            <li>8月</li>
+                            <li>9月</li>
+                            <li>10月</li>
+                            <li>11月</li>
+                            <li>12月</li>
+                            <div>
+                                <h5>1月活动</h5> 
+                                <p>11111111111111111111</p>
+                            </div>
+                        </div>
+                    </body>
+                </html>
+        </textarea>
+    </body>
+</html>

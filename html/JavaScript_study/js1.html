@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简单的了解js（1）</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        #div1 {
+            width: 200px; height: 30px; background-color: #ccc; border: 1px solid #999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <input type="checkbox" 
+        onmouseover="document.getElementById('div1').style.display='block';" 
+        onmouseout="document.getElementById('div1').style.display='none';"
+        >
+        <div id="div1">
+            为了您的信息安全。。
+        </div>
+    </div>
+    <textarea name="" id="" cols="120" rows="45">
+    js(1):学习简单的鼠标移入提示的写法
+    事件：其实加一个button不加事件点击也是没有反应的，代表用户的操作 
+    制作简单的鼠标移入事件： 当鼠标移入input的时候，div1显示，当鼠标移出的时候，div1消失。 
+    思路：div2本来就是隐藏的！当给div添加了事件之后才显示。其实就是改了div1的display； 
+        div1的样式：
+            #div1 {
+                width: 100px; height: 200px; background-color: #ccc; border: 1px solid #999;
+                display: none;
+            }
+        div以及input的代码：
+            <input type="checkbox" 
+            onmouseover="div1.style.display='block';" 
+            onmouseout="div1.style.display='none';">     
+            <!-- 
+                这是第一种代码的写写法，这种写法会出现兼容性问题 
+                低版本的浏览器都不能这样写
+                要写成document.getElementById("")这种写法
+                我电脑的浏览器都是高版本的，所以都兼容，但是在低版本的浏览器这种写法是不兼容的
+            -->
+            <div id="div1">
+                为了您的信息安全。。
+            </div>
+
+            改：
+                <input type="checkbox" 
+                onmouseover="document.getElementById('div1').style.display='block';" 
+                onmouseout="document.getElementById('div1').style.display='none';">
+                <!-- 这种写法才是正确的获取元素的方法，但是也不应该写在这里。以后写的代码都不能出现行间样式 -->
+                <div id="div1">
+                    为了您的信息安全。。
+                </div>
+
+            概括一下js到底是做什么的：
+                做动态的效果的；
+                布局：首先要用html+css布局；
+                属性：确认需要修改的属性；
+                事件：确定用户要操作的事件；
+                然后才是开始编写js文件
+
+            还有我发现一个事情，要使用ie浏览器，不管是高版本还是低版本，都需要同意使用那个什么控件才行。
+    
+    js（2）：学习js的函数。也会对这个js文件的一些写法进行改进；
+    </textarea>
+    
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学习循环</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        .d1 {
+            position: relative; float: left; clear: left;
+            min-width: 200px; min-height: 200px;
+        }
+    </style>
+    <script>
+        window.onload=function() {
+            var oBtn1=document.getElementById('btn1');
+            oBtn1.onclick=function() {
+                /*
+                var i=0;
+                while(i<5) {
+                    alert(i);
+                    i++
+                };
+                */
+                for(var i=0; i<5; i++) {
+                    alert(i);
+                };
+            };
+        };
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="d1">
+            <input id="btn1" type="button" value="按钮1">
+        </div>
+
+    </div>
+    <textarea name="" id="" cols="120" rows="45">
+    js(8): 学习js的循环
+        if：if即使条件成立，也是只执行一次，所以if不是循环
+        while: 语句：
+            while(条件) {
+                语句
+            }
+            当条件成立的时候，while会一种执行这个语句；
+            来个例子：按钮1
+                代码：
+                <script>
+                    window.onload=function() {
+                        var oBtn1=document.getElementById('btn1');
+                        oBtn1.onclick=function() {
+                            var i=0;        //初始化
+                            while(i<5) {    //条件
+                                alert(i);   //语句
+                                i++         //自增
+                            };
+                        };
+                    };
+                </script>
+                <body>
+                    <input id="btn1" type="button" value="按钮1">
+                </body>
+            这个例子可以简单的理解一下循环：
+                包括是个部分：1初始化 2.条件 3.语句 4.自增
+        for:理解为是while的简写版就好了，其他的区别以后再去了解
+            for(初始化 ; 条件 ; 自增)
+            for循环来写刚才的按钮1：
+            <script>
+                window.onload=function() {
+                    var oBtn1=document.getElementById('btn1');
+                    oBtn1.onclick=function() {
+                        for(var i=0; i<5; i++) {
+                            alert(i);
+                        };
+                    };
+                };
+            </script>
+            用for来选择全部的div，写个例子：新的网页上写：js8-1.html来写这个例子
+    其他提示：
+    js8-1.html:写的是循环的应用，以及全选、全不选以及反选
+    js8-2.html:选项卡的制作
+    js8-3.html:简易日历的制作
+
+    以上的js1到js8都是基础的了解一下js，从js9开始才细致的去讲解js。
+    js(9):js的基础知识
+    </textarea>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学习提取行间样式和事件</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        .d1 {
+            position: relative; margin: 10px; float: left; clear: left;
+        }
+        #div1 {
+            width: 200px; height: 200px; border: 1px solid black;
+        }
+        .toBlue {
+            background: blue;
+        }
+    </style>
+    <script>
+
+        function toRed() {
+            document.getElementById('div1').style.background="red";
+        }
+        function toBlue() {
+            document.getElementById('div1').className="toBlue";
+        }
+
+        window.onload =function () {
+            var oBtn=document.getElementById('btn1');
+            function abc() {
+                alert('a')
+            }
+            oBtn.onclick=abc;
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="d1">
+            <h4>
+                <strong> div1 </strong><br>
+                红色用行间改的，<br>
+                蓝色用class改的</h4>
+            <input type="button" value="变蓝" onclick="toBlue()">
+            <input type="button" value="变红" onclick="toRed()">
+            <div id="div1">
+        </div>
+        <div class="d1">
+            <h4><strong>div2</strong></h4>
+            <input id="btn1" type="button" value="按钮">
+        </div>
+        
+        </div>
+
+    </div>
+    <textarea name="" id="" cols="120" rows="50">
+    js(7): 提取行间样式，这个其实是比较简单的（这部分我看视频讲的比较杂，我分成小点来记录）
+    记住一个东西：在操作一个元素的时候，要么只用style要么只用class；
+
+    提取行间事件：
+        
+        
+    1.首先关于.style和.className的区别（提取行间样式）
+        .style是写在行间的，说道这里就要讲到css的优先级问题：
+            优先级：importent！> 行间样式（.style）> id > class > 标签（比如 body ul 之类的写法）> *
+        所以.style写在行间的优先级要大于class，得出的结论是，在操作一个元素的时候，都使用一种写法。不容易出错。
+            来个例子：div1
+                全部代码：
+                    <style>
+                        #div1 {
+                            width: 200px; height: 200px; border: 1px solid black;
+                        }
+                        .toBlue {
+                            background: blue;
+                        }
+                    </style>
+                    <script>      
+                        function toRed() {
+                            document.getElementById('div1').style.background="red";
+                        }
+                        function toBlue() {
+                            document.getElementById('div1').className="toBlue";
+                        }
+                    </script>
+                    <body>
+                        <h4>
+                            <strong> div1 </strong><br>
+                            红色用行间改的，<br>
+                            蓝色用class改的</h4>
+                        <input type="button" value="变蓝" onclick="toBlue()">
+                        <input type="button" value="变红" onclick="toRed()">
+                        <div id="div1">
+                    </body>
+                然后会发现一个问题：当我点击了变红之后，在点击变蓝是没有作用的；这就是优先级的关系。
+                在提取行间样式的时候，这个是很重要的！
+    2.提取行间事件：是为了分工合作中不容易出错，还有就是批量化之类的问题，写在行间的话就太多了。
+        如何给一个元素添加事件？或者是添加事件的本质：
+            要知道一点 比如：<input type="button" value="" onclick="">
+            onclick 也是input的一个属性，是属性就可以用js改，写法也可以不写在行间
+        意思就是，其实事件也是元素的一个属性，就像改css一样，写法也是这样/ 只是这个属性要加事件
+            来个例子：div2
+                div2的全部代码：
+                    <script>
+                            window.onload =function () {
+                            var oBtn=document.getElementById('btn1');
+                            function abc() {
+                                alert('a')
+                            }
+                            oBtn.onclick=abc;
+                        }
+                    </script>
+                    <body>
+                        <h4><strong>div2</strong></h4>
+                        <input id="btn1" type="button" value="按钮">
+                    </body>
+                其中需要注意的点：
+                    1，window.onload :表示当页面都加载了之后才执行这个function；原因是里面我var的一个变量
+                var oBtn=document.getElementById('btn1');中的id为btn1执行这句的时候，btn1还没有加载出来
+                    2.function() {} 表示的是一个匿名函数。也是对的。
+                    3.思路：和css一样：先获取找到这个id，然后给它添加事件，只是事件赋值的是函数（匿名函数，大大节省取名字的时间）
+                    4.再理解一遍1，因为设置了变量var，测试显示的是oBtn是没有值的，就是因为btn1没有被找到。而比如我的div1的js就没有
+                添加window.onload,是因为没有使用变量，所以不用写window.onload 。
+        3.行为、样式、结构三者分离：其实意思就是别写行间样式和行间事件
+            把js写在script标签里，或者外部的js文件
+            把css写在style标签里，或者外部的css文件
+            保证各方工作的时候互不干扰。在编辑html内容的时候不会误删掉js或者style等；
+        4.获取一组元素：getElementsByTagName()
+            1.获取出来的是一组元素；所以变成了一个数组
+            2.如果是数组，那么有一个很重要的属性：.length
+            3.在js中一次只能给一个元素设置样式，也就是不能给一个数组设置样式
+            4.所以引入了后边的循环；其实我简单的理解循环（在这里）就是把数组里的东西都选出来然后设置一样的样式；
+
+    js(8):学习循环
+    
+    </textarea>
+</body>
+</html>

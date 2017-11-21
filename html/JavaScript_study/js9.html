@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript的基础知识</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+    </style>
+    <script>
+        alert('基础的部分，大部分要看自己记录的文字部分')
+        
+        var a=12;
+        alert(typeof a);
+       
+
+        window.onload=function() {
+            var oTxt1=document.getElementById('txt1');
+            var oTxt2=document.getElementById('txt2');
+            var oBtn1=document.getElementById('btn1');
+            oBtn1.onclick=function() {
+                var n1=parseInt(oTxt1.value);
+                var n2=parseInt(oTxt2.value);
+                if(isNaN(n1) && isNaN(n2)) {
+                    alert('您输入的两个数字都有误');
+                }
+                else if(isNaN(n1)) {
+                    alert('您输入的第一个数字有误');
+                }
+                else if(isNaN(n2)) {
+                    alert('您输入的第二个数字有误')
+                }
+                else {
+                    alert(n1+n2);
+                }
+            }
+
+            var oBtn2=document.getElementById('btn2');
+            oBtn2.onclick=function() {
+                var a=5;
+                var b="5";
+                alert(a==b);  
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <h4>1.输入数字相加</h4>
+        <input id="txt1" type="text">
+        <input id="txt2" type="text">
+        <input id="btn1" type="button" value="文本相加">
+        <div class="div1"></div>
+
+        <div>
+            <h4>2.验证：隐性类型转换</h4>
+                &ltscript>  <br>
+                    var a=5;    <br>
+                    var b='5';  <br>
+                    alert(a==b);    <br>
+                &lt/script> <br>
+            <input id="btn2" type="button" value="点击显示这段js的结果">
+        </div>
+
+    </div>
+    <textarea name="" id="" cols="120" rows="40">
+    js(9):js的基础知识：
+        js的组成：
+            ECMAScript: 扮演了一个翻译的角色；就是标准语言           几乎没有兼容性问题
+            DOM:    document object model       document.         有一些操作不兼容
+            BOM:    browser object model        window.           没有兼容问题（完全不兼容）
+        变量：用于存放东西的。。。。（一般变量与数据类型相关），js里的变量比c简单多了，一个var就搞定了
+            <script>
+                var a=12;
+                alert(typeof a);
+            </script>
+            typeof :用于检测变量的类型；变量的类型：    
+            a=12    number          a="abcd"        string
+            a=true  boolean         a=function()    function
+            a=document      object
+            还有一种是不定义a，或者定义为空    类型为undefined        undefined也是一种类型
+            【为了不出错，最好一个变量只存1中数据类型最好；  】 
+        数据类型的转换：
+            例子：想要两个文本框输入的值相加：
+            <script>
+                window.onload=function() {
+                    var oTxt1=document.getElementById('txt1');
+                    var oTxt2=document.getElementById('txt2');
+                    var oBtn1=document.getElementById('btn1');
+                    oBtn1.onclick=function() {
+                        alert(oTxt1.value+oTxt2.value);
+                    }
+                }
+            </script>
+            <body>
+                <input id="txt1" type="text">
+                <input id="txt2" type="text">
+                <input id="btn1" type="button" value="文本相加">
+                <div class="div1"></div>
+            </body>
+            然而当输入第一个文本框12，第二个文本框5的时候，不会得到17，而是125
+            【所以，这个只是单单的进行了字符串的组合，想要相加为17，肯定要进行类型转换】
+            类型转换：字符串转数组：parseInt    特点:从左到右的读取，遇到第一个不是非数字的直接跳出
+                比如：parseInt(15x38)      :得到的还是15 
+                还有parseInt(abc)         :得出的是NaN        比较重要的知识，not a number；
+                可以用NaN这个值来提示用户是否输入错误等情况，比较重要。
+                NaN和NaN是不相等的
+                【缺点】parseInt只能用来转换成整数；
+                    <script>
+                        var a=parseInt('abc');
+                        var a=parseInt('def');
+                        alert(a==b);
+                        //得到的结果会是false，所以：NaN和NaN是不相等的
+                    </script>
+                    判断一个东西是不是NaN用：alert(isNaN(a));
+                        <script>
+                            var a=parseInt('abc');
+                            alert(isNaN(a));
+                            //得到的结果是true；所以：要检查是否是NaN就要用isNaN这个命令
+                        </script>
+            【改进】：把alert里面的部分改为下面就可以输入的数字相加了
+                <script>
+                    oBtn1.onclick=function() {
+                        alert(parseInt(oTxt1.value) +parseInt(oTxt2.value));
+                    }
+                </script>
+            【继续改进】判断当用户输入的不是数字的时候提醒用户：
+                <script>
+                    window.onload=function() {
+                        var oTxt1=document.getElementById('txt1');
+                        var oTxt2=document.getElementById('txt2');
+                        var oBtn1=document.getElementById('btn1');
+                        oBtn1.onclick=function() {
+                            var n1=parseInt(oTxt1.value);
+                            var n2=parseInt(oTxt2.value);
+                            if(isNaN(n1) && isNaN(n2)) {
+                                alert('您输入的两个数字都有误');
+                            }
+                            else if(isNaN(n1)) {
+                                alert('您输入的第一个数字有误');
+                            }
+                            else if(isNaN(n2)) {
+                                alert('您输入的第二个数字有误')
+                            }
+                            else {
+                                alert(n1+n2);
+                            }
+                        }
+                    }
+                </script>
+
+                parseInt只能用来转换成整数，想要转换小数就用：parseFloat;【这两种叫做强制类型转换】
+                还有一种叫做隐性类型转换，计算机自己进行的转换：比如：
+                    <script>
+                        var a=5;
+                        var b="5";
+                        alert(a==b);    //得出来的结果竟然是true
+                        alert(a===b);   //这样就是不转换类型直接比，得出的结果就是false；
+                    </script>
+                    再来一个例子：
+                    <script>
+                        var a='12';
+                        var b='5';
+                        alert(a+b);     //这个得出的就是125    因为+号在js中有两种功能：相加和字符串连接
+                        alert(a-b);     //这个得出的就是7      而-号只有一种功能，就是相减；
+                    </script>
+        作用域和闭包：
+            作用域：直接例子：
+                <script>
+                    var c=12;       //全局变量
+                    function aaa() {
+                        var a=12;   //局部变量，只能在这个函数里起作用
+                    }
+                    function bbb() {
+                        alert(a);   //会发现现在这个未定义，所以上边的a是aaa()里的局部变量
+                    }
+                    function ccc() {
+                        alert(c);   //会发现这里弹出来的会是12；因为c是全局变量。
+                    }
+                    aaa();
+                    bbb();
+                    ccc();
+                </script>
+            闭包：简单的理解
+                <script>
+                    function aaa() {    //aaa()是父函数
+                        var a=12;   //局部变量，只能在这个函数里起作用
+                        /*
+                            但是当我把function bbb() 写在了这个函数里的时候，
+                            bbb()里的也可以使用这个局部的a变量，这个就叫做闭包 
+                        */
+                        function bbb() {    //bbb()是子函数
+                        alert(a);
+                        }
+                    }
+                    aaa();
+                    bbb();
+                    //用一句简单的话来说：闭包就是子函数可以使用父函数的局部变量
+                </script>
+        命名规范以及必要性：可读性以及规范性；
+            匈牙利命名法：1.类型前缀   2.首字母大写
+                【类型前缀】：给变量取的时候才用，给函数取名的时候，不需要
+                类型          前缀          类型              实例
+                数组           a            Array             aItems
+                布尔值         b            Boolean           bIsComplete
+                浮点数         f            Float             fPrice
+                函数           fn           Function          fnHandler
+                整数           i            Integer           iItemCount
+                对象           o            Object            oDiv1
+                正则表达式     re           RegExp             reEmailCheck
+                字符串         s            String            sUserName
+                变体变量        v           Variant            vAnything
+    
+    js(10):学习运算符和jion；
+    </textarea>
+</body>
+</html>

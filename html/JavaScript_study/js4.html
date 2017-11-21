@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>if语句的学习</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        #div1 {
+            width: 300px; height: 30px; background-color: red; display: none;
+        }
+    </style>
+    <script>
+        function showHide() {
+            var oDiv=document.getElementById('div1');
+
+            if(oDiv.style.display=='block') {
+                oDiv.style.display="none";
+            }
+            else {
+                oDiv.style.display="block";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <input type="button" value="显示隐藏" onclick="showHide()">
+        <div id="div1">if语句实现一个事件解决不同的效果</div>
+    </div>
+    <textarea name="" id="" cols="120" rows="40">
+        js(4):学习if判读
+        if的格式：
+            if（条件） {
+                语句1
+            }
+            else {
+                语句2
+            }
+            
+            例子：学习一个很重要的功能，点击按钮显示/隐藏div（弹出菜单）
+                理解：当点击的时候，
+                    如果div是显示的，隐藏菜单      oDiv.style.display="none"
+                    或者，显示出来 oDiv.style.display="block"
+                if (div是显示的) {
+                    oDiv.style.display="none";
+                }
+                else {
+                    oDiv.style.display="block";
+                }
+                
+                div1的样式：
+                    #div1 {
+                        width: 300px; height: 30px; background-color: red; display: none;
+                    }
+                    <!-- 首先默认div1是隐藏的 -->
+                script代码：
+                    <script>
+                        function showHide() {
+                            var oDiv=document.getElementById('div1');
+                
+                            if(oDiv.style.display=='block') {
+                                oDiv.style.display="none";
+                            }
+                            else {
+                                oDiv.style.display="block";
+                            }
+                        }
+                    </script>
+                网页代码：
+                <input type="button" value="显示隐藏" onclick="showHide()">
+                <div id="div1">if语句实现一个事件解决不同的效果</div>
+
+                这个列子要学习到的就是要知道怎么写这个if语句，因为在之后的用来解决浏览器的兼容问题的时候经常要用
+            
+
+
+        其他知识：
+            = 一个等号表示的是赋值
+            == 两个等号表示判断
+
+    js(5):为a链接添加js
+            
+
+    </textarea>
+</body>
+</html>

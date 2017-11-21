@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>专门学习className获取元素</title>
+    <script>
+        /*
+        window.onload=function() {
+            var oUl=document.getElementById('ul1');
+            var aLi=oUl.getElementsByTagName('li');
+            for(var i=0; i<aLi.length; i++) {
+                if(aLi[i].className=='li1') {
+                    aLi[i].style.backgroundColor='#ccc';
+                }
+            } 
+        }
+        */
+        function getByClass(oParent, sClass) //首先要明确哪几个是要变的
+        {
+            var aResult=[];//这个空数组用来存储将要返回的值的
+            var aEle=oParent.getElementsByTagName('*');
+            for(var i=0; i<aEle.length; i++) {
+                if(aEle[i].className==sClass) {
+                    // return aEle[i];//不能直接返回出去，要组成一个数组了之后返回
+                    aResult.push(aEle[i]);//push是网数组里添加元素
+                }
+            }
+            return aResult;//然后直接在这里一次性的返回出这个数组
+        }
+        window.onload=function() {
+            var oUl=document.getElementById('ul1');
+            var aLi=getByClass(oUl,'li1');
+            for(var i=0; i<aLi.length; i++) {
+                aLi[i].style.backgroundColor='red';
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul id="ul1">
+        <li class="li1"></li>
+        <li class="li1"></li>
+        <li></li>
+        <li></li>
+        <li class="li1"></li>
+        <li></li>
+        <li class="li1"></li>
+        <li class="li1"></li>
+    </ul>
+    <textarea name="" id="" cols="120" rows="50">
+        实现class Name选择的代码
+            主要运用的就是if的这个函数：
+        <script>
+            window.onload=function() {
+                var oUl=document.getElementById('ul1');
+                var aLi=oUl.getElementsByTagName('li');
+                for(var i=0; i<aLi.length; i++) {
+                    if(aLi[i].className=='li1') {
+                        aLi[i].style.backgroundColor='#ccc';
+                    }
+                } 
+            }
+        </script>
+        <body>
+            <ul id="ul1">
+                <li class="li1"></li>
+                <li class="li1"></li>
+                <li></li>
+                <li></li>
+                <li class="li1"></li>
+                <li></li>
+                <li class="li1"></li>
+                <li class="li1"></li>
+            </ul>
+        </body>
+        接下来学习封装这个函数
+        <script>
+            /*
+            // 其实封装这个函数，主要的就是看哪些东西是要变的，哪些是不变的
+            // 自己写的，不一定是对的：
+            function getByClass(a,b) {
+                // 首先明确封装的目的是什么:为了要找到整个组里的相同的class
+                var n=document.getElementById('*');
+                var m=n.getElementsByTagName('a');
+                for(var i=0; i<m.length; i++) {
+                    if(m[i].className='a') {
+                        return m[i];
+                    }
+                }
+            }
+            // 我竟然可以根据自己的思路简单的封装一个函数了，还是将就了。
+            // 我自己写的，证明是错的了，在下面进行修改。
+            */
+            //【好好理解一下下面的这函数，对以后自己封装函数很有用，而且还可以建立自己的js库】
+           function getByClass(oParent, sClass) //首先要明确哪几个是要变的
+            {
+                var aResult=[];//这个空数组用来存储将要返回的值的
+                var aEle=oParent.getElementsByTagName('*');
+                for(var i=0; i<aEle.length; i++) {
+                    if(aEle[i].className==sClass) {
+                        // return aEle[i];//不能直接返回出去，要组成一个数组了之后返回
+                        aResult.push(aEle[i]);//push是网数组里添加元素
+                    }
+                }
+                return aResult;//然后直接在这里一次性的返回出这个数组
+            }
+            window.onload=function() {
+                var oUl=document.getElementById('ul1');
+                var aLi=getByClass(oUl,'li1');
+                for(var i=0; i<aLi.length; i++) {
+                    aLi[i].style.backgroundColor='red';
+                }
+            }
+        </script>
+    </textarea>
+</body>
+</html>

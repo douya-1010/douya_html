@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>网页换肤的效果以及实现（3）</title>
+    <link id="l1" rel="stylesheet" href="css1.css">
+    
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+
+    </style>
+    <script>
+        function skin1() {
+            var oL=document.getElementById('l1');
+            oL.href='css1.css';
+        }
+        function skin2() {
+            var oL=document.getElementById('l1');
+            oL.href='css2.css';
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <input type="button" value="皮肤1" onclick="skin1()">
+        <input type="button" value="皮肤2" onclick="skin2()">
+    </div>
+    <textarea name="" id="" cols="120" rows="40">
+    js(3):来更换网页的皮肤
+        思路：其实就是更换有代码里link的href属性；
+        首先提前准备了两个css文件分别是css1和css2
+        css1：
+            input {
+                width: 100px; height: 30px;
+                background-color: red;
+            }
+            body {
+                background-color: black;
+            }
+        css2：
+            input {
+                width: 300px; height: 50px;
+                background-color: blue;
+            }
+            body {
+                background-color: green;
+            }
+        link的代码：
+            <link id="l1" rel="stylesheet" href="css1.css">
+            <!--  
+                默认的皮肤为第一套皮肤
+                还有记住一句话：要改变哪个元素或者属性，就要在哪里加id；点击哪里就要在哪里加事件。
+
+                任何标签都是可以加id
+                任何属性都是可以改变的
+                html怎么写，js里就怎么写：这个很好理解。（但是要排除开一个就是css里的class，在js里调用改变要写成className）
+            -->
+        script代码：
+            <script>
+                function skin1() {
+                    var oL=document.getElementById('l1');
+                    oL.href='css1.css';
+                }
+                function skin2() {
+                    var oL=document.getElementById('l1');
+                    oL.href='css2.css';
+                }
+            </script>
+        网页代码：
+            <input type="button" value="皮肤1" onclick="skin1()">
+            <input type="button" value="皮肤2" onclick="skin2()">
+
+
+
+    js（4）：学习if语句：
+    </textarea>
+    
+</body>
+</html>

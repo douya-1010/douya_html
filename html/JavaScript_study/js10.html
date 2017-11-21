@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>运算符和jion</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+    </style>
+    <script>
+        alert('这些都是基础知识点：看自己记录下来的东西');
+        window.onload=function() {
+            var oDiv1=document.getElementById('div1');
+            var aLi=oDiv1.getElementsByTagName('li');
+            for(var i=0; i<aLi.length; i++) {
+                if(i%2==0){
+                    aLi[i].style.background="#ccc";     //这样就表示当前的i为那个颜色了，下次还有理解一下
+                }
+                else{
+                    aLi[i].style.background="";
+                }
+            }
+
+            var s=156;
+            alert(parseInt(s/60)+'分'+ s%60+'秒');
+            // 这里要注意，如果直接写的alert(s/60+'分'); 出来的回事2.6分，不是整数，而是小数
+        }
+
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="div1">
+            <ul>
+                <li>取模的应用，隔行变色</li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+            
+    </div>
+    <textarea name="" id="" cols="120" rows="40">
+    js(10):运算符和jion
+        运算符：
+            + - * / 这四个就不说了，加减乘除
+            % 重点说这个：取模；
+                例子：隔行变色：
+                    <body>
+                        <div id="div1">
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </body>
+                    <script>
+                        window.onload=function() {
+                            var oDiv1=document.getElementById('div1');
+                            var aLi=oDiv1.getElementsByTagName('li');
+                            for(var i=0; i<aLi.length; i++) {
+                                if(i%2==0){
+                                    aLi[i].style.background="#ccc";     //这样就表示当前的i为那个颜色了，下次还有理解一下
+                                }
+                                else{
+                                    aLi[i].style.background="";
+                                }
+                            }
+                        }
+                    </script>
+                再来个例子：时间转换：
+                    <script>
+                        var s=156;
+                        alert(parseInt(s/60)+'分'+ s%60+'秒');
+                        // 这里要注意，如果直接写的alert(s/60+'分'); 出来的回事2.6分，不是整数，而是小数
+                    </script>
+            += -= *= /= %=  这几个都不说了
+            < > <= >== == === != !==    这几个也不用说了
+            && || ！ 与 或 非   这几个有不用说了
+            运算符优先级：()
+        
+        流程控制：
+            1.if(条件) {
+                语句
+            }
+            else if(条件) {
+                语句
+            }
+            else {
+                语句
+            }
+            2.switch(变量) {
+                case 值1：
+                    语句1
+                    break;
+                case 值2：
+                    语句2
+                    break;
+                sefault：
+                    语句3;
+            }
+                例子：
+                <script>
+                    var name='abc';
+                    var sex='';
+
+                    swich(sex) 
+                    {
+                        case '男':
+                            alert(name+'先生，你好');
+                            break;
+                        case '女':
+                            alert(name+'女士，你好');
+                        default:
+                            alert(name+'你好');
+                    }
+                </script>
+                写法就是这样，要看例子在js10-1.html里去看，那个里面写的就可以运行；
+                那边的写法是这样的：
+                <script>
+                    window.onload=function() {
+                        var oName=document.getElementById('name');
+                        var oSex=document.getElementById('sex');
+                        var oBtn=document.getElementById('btn1');
+                        oBtn.onclick=function() {
+                            var n=oName.value;
+                            var s=oSex.value;
+                            switch(s) {
+                                case '男':
+                                    alert('尊敬的'+n+'先生，您好！');
+                                    break;
+                                case '女':
+                                    alert('尊敬的'+n+'女士，您好！');
+                                    break;
+                                default:
+                                    alert(n+'，您好');
+                            }
+                        }
+                    }
+                </script>
+                <body>
+                    <div class="div1">
+                        姓名:   <br>
+                        <input id="name" type="text"> <br>
+                        性别:    <br>
+                        <input id="sex" type="text">    <br>
+                        <input id="btn1" type="button" value="确定">
+                    </div>
+                </body>
+            3.三目运算符：?:
+                和if差不多，代替
+                if(条件) {
+                    语句1
+                }  else{
+                    语句2
+                }    
+                    条件? 语句1 : 语句2
+            4.break 和
+                break:      中断整个循环的，之后就没有了
+                continue:   中断当前循环，其实就是跳过本次循环
+            5.判断什么是真，什么是假：
+                <script>
+                    var a=true;
+                    if(a) {
+                        alert('真的');    
+                    } else {
+                        alert('假的');
+                    }
+                    // a=true的时候，弹出的是真。
+                    // a=12 或a=-5 的时候，弹出的是真，但是a=0的时候，弹出的是假的
+                    /* 
+                        总结哪些是真，哪些是假：
+                        真：true、非零数字、非零字符串、非空对象
+                        假：false、数字零、空字符串、空对象、undefined
+                     */
+                </script>
+            6.json：
+                什么是json：和数组有点像，都是用来存东西的
+                    <script>
+                        var a=12;
+                        var b=5;
+                        var c='abc';
+
+                        var json={a:12, b:5, c:'abc'};
+                        /* 
+                        写法：用大括号括起来的，数组时用中括号括起来的
+                            数组的写法 var arr=[12, 4, 'abc'];    数组是没有名称的
+                        json={名字：值，名字：值}    写法是名字：（冒号）值，（逗号）
+                        */
+                        json.b++;           // 放入json的东西，也可以像变量一样操作：
+                        alert(json.a);      //提取json的方法
+                    </script>
+                json和数组的区别：
+                    json的下表是字符串
+                    数组有一个很重要的属性length，但是json没有
+                        那怎么循环json呢？for in循环，数组也可以用这个循环，但是json只能用for in循环
+                        for( var i in json);
+
+    js(11):深入了解js          
+    </textarea>
+</body>
+</html>

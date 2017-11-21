@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>延时提示框的制作</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        textarea {
+            position: relative;float: left;clear: both; margin-top: 20px;
+        }
+        #div1 {
+            position: relative; float: left; margin-right: 20px;
+            width: 50px; height: 50px;
+            background: red;
+        }
+        #div2 {
+            position: relative; float: left;
+            width: 100px; height: 100px;
+            background: gray;
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload=function() {
+            var oDiv1=document.getElementById('div1');
+            var oDiv2=document.getElementById('div2');
+            var timer=null;
+            oDiv2.onmouseover=oDiv1.onmouseover=function() {
+                oDiv2.style.display='block';
+                clearTimeout(timer);        //关闭定时2
+            }
+            oDiv2.onmouseout=oDiv1.onmouseout=function() {
+                timer=setTimeout(function() {
+                    oDiv2.style.display='none';
+                },500);     //设置定时1
+            }
+            /*
+            oDiv2.onmouseover=function() {
+                clearTimeout(timer);        //关闭定时1
+            }       //会发现和第一个mouse over只差了一个display，但是想想：如果当移入div2时div2本来就是显示的，那么再来一次显示也是不影响的，所以，也可以合并了
+            */
+            /*
+            oDiv2.onmouseout=function() {
+                timer=setTimeout(function() {
+                    oDiv2.style.display='none';
+                },500);     //设置定时2
+            }       //会发现，两个mouseout的函数是一样的，所以整合
+            */
+
+        /*接下来把下面的代码整理一下
+        window.onload=function() {
+            var oDiv1=document.getElementById('div1');
+            var oDiv2=document.getElementById('div2');
+            var timer=null;
+            oDiv1.onmouseover=function() {
+                oDiv2.style.display='block';
+                //为了解除当鼠标移出div2时的延迟定时
+                clearTimeout(timer);
+            }       //当鼠标移入的时候显示
+            oDiv1.onmouseout=function() {
+                timer=setTimeout(function() {
+                    oDiv2.style.display='none';
+                },500);
+            }       //当鼠标移出的时候延迟2秒显示
+            oDiv2.onmouseover=function() {
+                clearTimeout(timer) ;     //为了要解除定时，所以要去创建一个变量存要解除的定时
+            }       //当鼠标移入灰色div时，解除延迟两秒消失
+            // 进而又出现了一个问题，当鼠标一开灰色div的时候，灰色div就不消失了，所以，又要个灰色加消失
+            oDiv2.onmouseout=function() {
+                    // oDiv2.style.display='none';
+                //为了不让从鼠标从灰色移入红色时产生闪动，这里添加一个延迟灰色消失
+                timer=setTimeout(function() {
+                    oDiv2.style.display='none';
+                },500);
+                // 但是这样又产生了一个问题，当鼠标移入到div1的时候，div2延迟两秒之后就消失了，
+                // 其实就是只执行了当鼠标移出div2时延迟，消失，和当时的鼠标移出div1时div2延迟消失一样，所以要在移入div1时解除延迟消失
+                    
+            }
+            //总结一下这里面的思路，就是在设置了延迟定时之后，如果想再移入某一个div它不消失的话，都要解除定时，还有就是如果时间是一样的，定时可以设置为同一个变量
+            // 全部把时间改为500试试：
+
+            /*这里写的不能运行，写错了   第一个是写对了的，我当时没注意
+            oDiv1.onmouseout=function() {
+                setTimeout(function() {
+                    oDiv2.display='none';
+                },2000);
+            }
+            这里也错了
+            setTimeout(function() {
+                oDiv1.onmouseout=function() {
+                    oDiv2.style.display='block';
+                };
+            },2000);
+            */
+        }
+    </script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <div id="div1"></div>
+        <div id="div2"></div>
+    </div>
+    <textarea name="" id="" cols="120" rows="40">
+        在这里总结下思路：其实就是，当鼠标移入不管是div1还是div2是，div2要显示，并且要移除div2的延迟退出定时
+        当鼠标移出不管是div1还是div2是，div2都要延迟消失（因为这里设置了定时消失，所以当鼠标移入不管是div1还是div2时，都要移除定时）
+        【javascript代码：】
+            <script>
+                window.onload=function() {
+                    var oDiv1=document.getElementById('div1');
+                    var oDiv2=document.getElementById('div2');
+                    var timer=null;
+                    oDiv2.onmouseover=oDiv1.onmouseover=function() {
+                        oDiv2.style.display='block';
+                        clearTimeout(timer);        //关闭定时2
+                    }
+                    oDiv2.onmouseout=oDiv1.onmouseout=function() {
+                        timer=setTimeout(function() {
+                            oDiv2.style.display='none';
+                        },500);     //设置定时1
+                    }
+                    /*
+                    oDiv2.onmouseover=function() {
+                        clearTimeout(timer);        //关闭定时1
+                    }       //会发现和第一个mouse over只差了一个display，但是想想：如果当移入div2时div2本来就是显示的，那么再来一次显示也是不影响的，所以，也可以合并了
+                    */
+                    /*
+                    oDiv2.onmouseout=function() {
+                        timer=setTimeout(function() {
+                            oDiv2.style.display='none';
+                        },500);     //设置定时2
+                    }       //会发现，两个mouseout的函数是一样的，所以整合
+                    */
+        
+                /*接下来把下面的代码整理一下
+                window.onload=function() {
+                    var oDiv1=document.getElementById('div1');
+                    var oDiv2=document.getElementById('div2');
+                    var timer=null;
+                    oDiv1.onmouseover=function() {
+                        oDiv2.style.display='block';
+                        //为了解除当鼠标移出div2时的延迟定时
+                        clearTimeout(timer);
+                    }       //当鼠标移入的时候显示
+                    oDiv1.onmouseout=function() {
+                        timer=setTimeout(function() {
+                            oDiv2.style.display='none';
+                        },500);
+                    }       //当鼠标移出的时候延迟2秒显示
+                    oDiv2.onmouseover=function() {
+                        clearTimeout(timer) ;     //为了要解除定时，所以要去创建一个变量存要解除的定时
+                    }       //当鼠标移入灰色div时，解除延迟两秒消失
+                    // 进而又出现了一个问题，当鼠标一开灰色div的时候，灰色div就不消失了，所以，又要个灰色加消失
+                    oDiv2.onmouseout=function() {
+                            // oDiv2.style.display='none';
+                        //为了不让从鼠标从灰色移入红色时产生闪动，这里添加一个延迟灰色消失
+                        timer=setTimeout(function() {
+                            oDiv2.style.display='none';
+                        },500);
+                        // 但是这样又产生了一个问题，当鼠标移入到div1的时候，div2延迟两秒之后就消失了，
+                        // 其实就是只执行了当鼠标移出div2时延迟，消失，和当时的鼠标移出div1时div2延迟消失一样，所以要在移入div1时解除延迟消失
+                            
+                    }
+                    //总结一下这里面的思路，就是在设置了延迟定时之后，如果想再移入某一个div它不消失的话，都要解除定时，还有就是如果时间是一样的，定时可以设置为同一个变量
+                    // 全部把时间改为500试试：
+        
+                    /*这里写的不能运行，写错了   第一个是写对了的，我当时没注意
+                    oDiv1.onmouseout=function() {
+                        setTimeout(function() {
+                            oDiv2.display='none';
+                        },2000);
+                    }
+                    这里也错了
+                    setTimeout(function() {
+                        oDiv1.onmouseout=function() {
+                            oDiv2.style.display='block';
+                        };
+                    },2000);
+                    */
+                }
+            </script>
+        【style代码：】
+            <style>
+                .wrapper {
+                    position: relative; margin: 10px;
+                }
+                textarea {
+                    position: relative;float: left;clear: both; margin-top: 20px;
+                }
+                #div1 {
+                    position: relative; float: left; margin-right: 20px;
+                    width: 50px; height: 50px;
+                    background: red;
+                }
+                #div2 {
+                    position: relative; float: left;
+                    width: 100px; height: 100px;
+                    background: gray;
+                    display: none;
+                }
+            </style>
+        【body代码：】
+            <div id="div1"></div>
+            <div id="div2"></div>
+    </textarea>
+</body>
+</html>

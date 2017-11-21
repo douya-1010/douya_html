@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>定时器的使用</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+    </style>
+    <script>
+        function show() {
+            alert('这是一个延迟1秒的弹出框哦');
+        }
+        setTimeout(show, 1000); 
+
+        window.onload=function() {
+            var oBtn1=document.getElementById('btn1');
+            var oBtn2=document.getElementById('btn2');
+            var timer=null;     //为关闭定时器做准备，准备一个变量，来存放定时器的返回值
+            oBtn1.onclick=function() {
+                timer=setInterval(function() {      //用刚才创建的变量储存这个定时器，为了等下关闭
+                    alert('这是一个间隔型定时器哦，每隔5秒弹出一次，一秒我关不赢');
+                },5000)
+            }
+            oBtn2.onclick=function() {
+                clearInterval(timer);     //要知道想要关闭的是哪个定时器
+                /* 
+                    关闭的思路其实比较简单：
+                    先定义一个变量，用来存放刚才的定时器，
+                    然后在clearInterval中传入这个参数
+                    注意：我也不清楚是不是定义的变量一定要写成：timer=null,不知道是不是一样要写成null。
+                 */
+            }
+
+            var oDiv=document.getElementById('div1');
+            var aImg=oDiv.getElementsByTagName('img');
+            function change(){
+                // 应该是把这下面的都封装到函数里：
+                var oDate=new Date();
+                var sTime;
+                // sTime=oDate.getHours()+oDate.getMinutes()+oDate.getSeconds();    这样写的话它会当作是数字加起来了！所以要想办法转换成字符串
+                    function tozifu(n) {
+                        if(n<10) {
+                        return '0'+n;
+                    }
+                    else {
+                        return ''+n;        //这样写的作用是函数返回出来的肯定是一个字符串。
+                    }
+                }
+                sTime=tozifu(oDate.getHours())+tozifu(oDate.getMinutes())+tozifu(oDate.getSeconds());
+                // 用一个转换字符的函数这样写就可以得到一个一定是6位数的字符
+                // alert(sTime);
+                // 把下面封装成函数,我理解错了，不单单是把这下面的封装到一个函数里，要把上面也一起
+                    // 下面这段代码是让图片和时间对应。但是不能事实刷新。所以要加定时：
+                    for(var i=0; i<aImg.length; i++) {
+                    // aImg[i].src="../../images/shuma/'sTime[i]'.png";     不能像这样写，写
+                    aImg[i].src="../../images/shuma/"+sTime[i]+".png";
+                    }
+            }
+            setInterval(change,1000);   //让上面的函数每隔1秒刷新
+            change();   //加这里是为了不让每次刷新都从0开始
+                
+            /*
+            function show1() {
+                var oDate=new Date();
+                alert(oDate.getHours());
+            }
+            show1();
+            */
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+            <input id="btn1" type="button" value="开启间隔型定时器">
+            <input id="btn2" type="button" value="关闭这个定时器">
+        </div>
+        <br>
+        <div id="div1">
+            制作数码时钟 <br>
+            <img src="../../images/shuma/0.png" alt="">
+            <img src="../../images/shuma/0.png" alt="">
+            :
+            <img src="../../images/shuma/0.png" alt="">
+            <img src="../../images/shuma/0.png" alt="">
+            :
+            <img src="../../images/shuma/0.png" alt="">
+            <img src="../../images/shuma/0.png" alt="">
+        </div>
+
+    </div>
+    <textarea name="" id="" cols="120" rows="45">
+    js(12)：定时器的学习
+        开启定时器：
+            setINterval     间隔型
+                <script>
+                    function show() {
+                        alert('a');
+                    }
+                    setInterval(show, 1000);        //卧槽，这个是每隔1秒钟弹出一次a，我的小心肝啊，受不了这打击
+                </script>
+            setTimeout      延时型
+                <script>
+                    function show() {
+                        alert('a');
+                    }
+                    setTimeout(show, 1000);        //这个就是延迟1秒弹出一次，然后就不弹出来了
+                </script>
+        停止定时器
+            clearInterval   
+            开启与关闭的写法都写在这个例子里了，clearTimeout也是同样的原理的
+            <script>
+                window.onload=function() {
+                    var oBtn1=document.getElementById('btn1');
+                    var oBtn2=document.getElementById('btn2');
+                    var timer=null;     //为关闭定时器做准备，准备一个变量，来存放定时器的返回值
+                    oBtn1.onclick=function() {
+                        timer=setInterval(function() {      //用刚才创建的变量储存这个定时器，为了等下关闭
+                            alert('这是一个间隔型定时器哦，每隔5秒弹出一次，一秒我关不赢');
+                        },5000)
+                    }
+                    oBtn2.onclick=function() {
+                        clearInterval(timer);     //要知道想要关闭的是哪个定时器
+                        /* 
+                            关闭的思路其实比较简单：
+                            先定义一个变量，用来存放刚才的定时器，
+                            然后在clearInterval中传入这个参数
+                            注意：我也不清楚是不是定义的变量一定要写成：timer=null,不知道是不是一样要写成null。
+                        */
+                    }
+                }
+            </script>
+            clearTimeout
+        例子：做数码时钟
+            新建js12-1.html来制作这个数码时钟。
+
+            效果思路
+            获取系统时间
+                data对象
+                getHours、getMinutes、getSeconds
+                <script>
+                    function show1() {
+                        var oDate=new Date();
+                        alert(oDate.getHours());
+                    }
+                    show1();
+                    /*
+                        这里要注意两个问题，我自己在做的时候就忽略了：
+                        1.创建var oDate的时候，后边date的后边要加括号的，
+                        2.创建alert里面的时候，oDate.getHours后边也是要有括号的，
+                        就是这两个问题导致我一直测试出来都是错的。
+                    */
+                </script>
+            显示系统时间
+                字符串链接
+                空位补零
+            设置图片路径
+                charAt方法
+                【所有的代码放在这里：】
+                    <script>
+                        var oDiv=document.getElementById('div1');
+                        var aImg=oDiv.getElementsByTagName('img');
+                        function change(){
+                            // 应该是把这下面的都封装到函数里：
+                            var oDate=new Date();
+                            var sTime;
+                            // sTime=oDate.getHours()+oDate.getMinutes()+oDate.getSeconds();    这样写的话它会当作是数字加起来了！所以要想办法转换成字符串
+                                function tozifu(n) {
+                                    if(n<10) {
+                                    return '0'+n;
+                                }
+                                else {
+                                    return ''+n;        //这样写的作用是函数返回出来的肯定是一个字符串。
+                                }
+                            }
+                            sTime=tozifu(oDate.getHours())+tozifu(oDate.getMinutes())+tozifu(oDate.getSeconds());
+                            // 用一个转换字符的函数这样写就可以得到一个一定是6位数的字符
+                            // alert(sTime);
+                            // 把下面封装成函数,我理解错了，不单单是把这下面的封装到一个函数里，要把上面也一起
+                                // 下面这段代码是让图片和时间对应。但是不能事实刷新。所以要加定时：
+                                for(var i=0; i<aImg.length; i++) {
+                                // aImg[i].src="../../images/shuma/'sTime[i]'.png";     不能像这样写，写
+                                aImg[i].src="../../images/shuma/"+sTime[i]+".png";
+                                }
+                        }
+                        setInterval(change,1000);   //让上面的函数每隔1秒刷新
+                        change();   //加这里是为了不让每次刷新都从0开始
+                            
+                        /*
+                        function show1() {
+                            var oDate=new Date();
+                            alert(oDate.getHours());
+                        }
+                        show1();
+                        */
+                    </script>
+        延时提示框
+            
+        无缝滚动
+    </textarea>
+</body>
+</html>

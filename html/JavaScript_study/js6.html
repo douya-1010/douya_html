@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学习函数传参、提前行间样式</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+        #div1 {
+            width: 200px; height: 200px; background-color: red;
+        }
+        #div2 {
+            width: 200px; height: 200px; background-color: red;
+        }
+        .d1 {
+            position: relative; float: left; margin: 10px; clear: left;
+        }
+    </style>
+    <script>
+        /*
+        function toGreen() {
+            var oDiv=document.getElementById('div1');
+
+            oDiv.style.background='green';
+        }
+        function toYellow() {
+            var oDiv=document.getElementById('div1');
+
+            oDiv.style.background='yellow';
+        }
+        function toBlack() {
+            var oDiv=document.getElementById('div1');
+
+            oDiv.style.background='black';
+        }
+        */
+        function setColor(color) {
+            var oDiv=document.getElementById('div1');
+            oDiv.style.background=color;
+        }
+
+        function show(num) {
+            alert(num)
+        }
+        show('学习函数传参');
+        // 记住字符的话就一定更要打双引号或者单引号
+
+        /*
+        function toWidth() {
+            var oDiv=document.getElementById('div2');
+            oDiv.style.width="300px";
+        }
+        function toHeight() {
+            var oDiv=document.getElementById('div2');
+            oDiv.style.height="300px";
+        }
+        function toGreen() {
+            var oDiv=document.getElementById('div2');
+            oDiv.style.background="green";
+        }
+        */
+        function setStyle(name, value) {
+            var oDiv=document.getElementById('div2');
+            oDiv.style[name]=value;
+        }
+
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="d1">
+            <!-- 
+            <input type="button" value="变绿" onclick="toGreen()">
+            <input type="button" value="变黄" onclick="toYellow()">
+            <input type="button" value="变黑" onclick="toBlack">
+            -->
+            <input type="button" value="变绿" onclick="setColor('green')">
+            <input type="button" value="变黄" onclick="setColor('yellow')">
+            <input type="button" value="变黑" onclick="setColor('black')">
+            <div id="div1"></div>
+        </div>
+        <div class="d1">
+            <input type="button" value="变宽" onclick="setStyle('width','300px')">
+            <input type="button" value="变高" onclick="setStyle('height','300px')">
+            <input type="button" value="变绿" onclick="setStyle('backgroundColor','green')">
+            <div id="div2"></div>
+        </div> 
+    </div>
+    <textarea name="" id="" cols="100" rows="40">
+    js(6):学习函数传参、提取行间样式以及循环
+        函数传参：
+            例子：3个按钮，一个div，点击每个按钮，div变动相应的颜色
+            css代码：
+                #div1 {
+                    width: 200px; height: 200px; background-color: red;
+                }
+            网页代码：
+            <input type="button" value="变绿" onclick="toGreen()">
+            <input type="button" value="变黄" onclick="toYellow()">
+            <input type="button" value="变黑" onclick="toBlack">
+            <div id="div1"></div>
+            script代码：
+                <script>
+                    function toGreen() {
+                        var oDiv=document.getElementById('div1');
+            
+                        oDiv.style.background='green';
+                    }
+                    function toYellow() {
+                        var oDiv=document.getElementById('div1');
+            
+                        oDiv.style.background='yellow';
+                    }
+                    function toBlack() {
+                        var oDiv=document.getElementById('div1');
+            
+                        oDiv.style.background='black';
+                    }
+                </script>
+            
+            改进：（函数传参）
+                理解：
+                    function show(){
+                        alert('a')
+                    }
+                    show();
+                    现在这个函数只能传出a ，如果改成
+                    function show(num){
+                        alert(num)
+                    }
+                    show(22);
+                    改进后的函数就是show后边跟多少，就alert多少。
+                        function show(num) {
+                            alert(num)
+                        }
+                        show('学习函数传参');
+                        // 记住字符的话就一定更要打双引号或者单引号
+                    函数的参数可以是多个
+                script代码：
+                    <script>
+                        function setColor(color) {
+                            var oDiv=document.getElementById('div1');
+                            oDiv.style.background=color;
+                        }
+                    </script>
+                网页代码：
+                    <input type="button" value="变绿" onclick="setColor('green')">
+                    <input type="button" value="变黄" onclick="setColor('yellow')">
+                    <input type="button" value="变黑" onclick="setColor('black')">
+                    <div id="div1"></div>
+                总的来说就是又是一种把相同的部分合并的写法：
+                    什么时候用传参呢：函数里有一部分东西定不下来的时候，刚才的函数里比如不能确定具体的颜色；
+                            其实我理解的是：当我也改变的是一个属性的时候，但是每个按键或者其他改变的值是不同的时候，
+                            用这种单一变量的传参；
+
+            函数的传参，不单单改变一个属性：
+                用第二个盒子来演示：盒子原本的宽高与第一个一样，颜色也是
+                script本来的写法
+                <script>
+                    function toWidth() {
+                        var oDiv=document.getElementById('div2');
+                        oDiv.style.width="300px";
+                    }
+                    function toHeight() {
+                        var oDiv=document.getElementById('div2');
+                        oDiv.style.height="300px";
+                    }
+                    function toGreen() {
+                        var oDiv=document.getElementById('div2');
+                        oDiv.style.background="green";
+                    }
+                </script>
+                网页代码：
+                    <input type="button" value="变宽" onclick="toWidth()">
+                    <input type="button" value="变高" onclick="toHeight()">
+                    <input type="button" value="变绿" onclick="toGreen()">
+                    <div id="div2"></div>
+
+                改进：
+                <script>
+                    function setStyle(name, value) {
+                        var oDiv=document.getElementById('div2');
+                        oDiv.style[name]=value;
+                    }
+                </script>
+                <input type="button" value="变宽" onclick="setStyle('width','300px')">
+                <input type="button" value="变高" onclick="setStyle('height','300px')">
+                <input type="button" value="变绿" onclick="setStyle('backgroundColor','green')">
+                <div id="div2"></div>
+                    这里要注意一个问题：script里的不能写成这样：
+                        oDiv.style.name=value;
+                    这样的话是读不出来的，电脑会理解为style里有一个叫name的属性，
+                    所以引入了第二种表示属性的[]的符号来表示，js里，但凡能用.的，都能用[]
+                        第二种[]表示属性写法的好处：方括号里可以放字符串，如果可以放字符串，那么就可以
+                        用变量来存起来，进而也可以用来做函数的参数了
+                    还有再提醒自己一次：字符串的时候一定要叫单引号或者双引号。
+
+
+            其他知识点：变量和字符串的区别：就是什么时候要用引号，什么时候不用；
+                字面量（常量）：看到的东西，是固定了的，写什么就是什么
+                变量：里面的内容是不固定的
+                如果用的是变量的话就不用加引号，除了变量之外，都需要加引号；
+
+        js(7):提取行间样式：
+        
+    </textarea>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>深入了解JavaScript</title>
+    <style>
+        .wrapper {
+            position: relative; margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+
+    </div>
+    <textarea name="" id="" cols="120" rows="45">
+    js(11):深入了解js
+        函数的返回值：
+            什么是函数的返回值：
+            【函数的返回值正好和函数传参相反：函数传参是把值传到函数里，函数的返回值是函数把值传到外边来】
+            <script>
+                function show() {
+                    return 12;
+                }
+                var a=show();
+                alert(a);       //会弹出12， 还可以直接alert(show()),不要上面一排，结果也是一样的
+                //return也是可以返回字符串；还可以范围算式
+                /*
+                    function show(a, b) {
+                        return a+b;
+                    }
+                    alert(show(3, 5));      返回出来的是8
+
+                    function show() {
+                        return 'abcd';
+                    }
+                    alert(show());          返回出来的是abcd，是字符串；
+                    函数的参数可以有多个，但是返回值只有一个，
+                    学到后面json好像可以返回多个值/
+
+                    function show(a, b) {
+                        return;     return为空，
+                    }
+                    alert(show(3, 5));      返回出来的是undefined；
+
+                    function show(a, b) {
+                                            没有return
+                    }
+                    alert(show(3, 5));      返回出来的也是undefined；
+                */
+            </script>
+                函数的执行结果
+                可以没有return
+            一个函数应该只返回一种类型的值
+            【自己理解一下】因为容易和之前学的哪些东西搞混，比如之前的
+                <script>
+                    window.onload=function() {
+                    var oName=document.getElementById('name');
+                    var oSex=document.getElementById('sex');
+                    var oBtn=document.getElementById('btn1');
+                    oBtn.onclick=function() {
+                        var n=oName.value;
+                        var s=oSex.value;
+                        switch(s) {
+                            case '男':
+                                alert('尊敬的'+n+'先生，您好！');
+                                break;
+                            case '女':
+                                alert('尊敬的'+n+'女士，您好！');
+                                break;
+                            default:
+                                alert(n+'，您好');
+                        }
+                    }
+                }
+                </script>
+            这里面就没有return啊，也可以执行，我觉得要把这两种分开来看，return是可以写在这里，然后可以返回
+            出比如 var n 继续供其他的函数或者外部的其他算式使用。
+            当时在理解这里的时候就没懂，感觉好像其实一个函数一定要return才能执行一样。
+
+        函数传参：和前面学的函数传参还不完全一样
+            可变参（不定参）：arguments
+            参数的个数可变，参数数组
+            【之前学的传参】
+                <script>
+                    function setColor(color) {
+                        var oDiv=document.getElementById('div1');
+                        oDiv.style.background=color;
+                    }
+                </script>
+                <script>
+                    function setStyle(name, value) {
+                        var oDiv=document.getElementById('div2');
+                        oDiv.style[name]=value;
+                    }
+                </script>
+            之前学的这两个传参都是规定了括号里面参数的个数和名字的，而这里学的是函数的参数是可以改变的：
+            例子1：求和，求所有参数的和            
+            写法：
+                <script>
+                    // 之前学的传参的样子
+                    function sum(a, b, c) {
+                        return(a+b+c);
+                    }
+                    alert(sum(12, 6, 8));
+                </script>
+                改：
+                <script>
+                    function sum() {
+                        // rguments
+                        // arguments其实是一个数组，存的就是传给这个函数的参数，这里就是(12, 6, 8)
+                        // alert(arguments,length);    //这样写的话这里弹出的是3
+                        // alert(arguments[0]);    //这里弹出是12
+                        var result=0;
+                        for(var i=0; i<arguments.length; i++) {
+                            result += arguments[i];
+                            /* 
+                                arguments[i]可以有的值是
+                                arguments[0]    12
+                                arguments[1]    6
+                                arguments[2]    8
+                                那么上面那个写法就是累加，但是有不是像之前累加的是一个固定值：
+                                    比如我们之前写的：b += 2 :表示的是b + 2 =b； 一直累加一个二
+                                而这里是这样的一个过程：
+                                    return的初始值是0
+                                    0 + 12 = return =12
+                                    12 + 6 = return =18
+                                    20 + 8 = return =26
+                                所以，其实上面的写法就是把这个数组里的值相加
+                                就好比上一个函数的return(a+b+c);
+                            */
+                            return result;
+                        }
+                    }
+                    alert(sum(12, 6, 8));
+                </script>
+                【这个函数和上面一个函数的结果是一样的，但是这个函数的参数个数是可以改变的，而第一个是写死了的】
+                例子2：css函数，
+                【一些有意思的知识点，在jQuery里的知识点】
+                    css(oDiv, 'width')              当这里是两个参数的时候，是在获取样式
+                    css(oDiv, 'width', '200px')     当这里是三个参数的时候，是在设置样式
+                    【实现原理：】
+                        <script>
+                            function css() {
+                                if(arguments.length==2) {
+                                    return arguments[0].style[arguments[1]];
+                                }
+                                else {
+                                    return arguments[0].style[arguments[1]]=arguments[2];
+                                }
+                            }
+                        </script>
+                        <body>
+                            <!-- 还没学后边的获取非行间样式，所以先写行间样式 -->
+                            <div id="div1" style="width:200px; height:200px; background:red;"></div>
+                        </body>
+                    判断argument.length
+                    给参数取名，增强可读性
+
+                取非行间样式：（不能用来设置）
+                        
+                    js第二定律：好东西，一定不兼容，哈哈哈哈哈哈哈哈 
+                    cerrentStyle只能用在ie里：.currentStyle.width写法
+                    所以对于chrome和火狐；要用:getComputeedStyle
+                    两个的写法在下面，getComputeedStyle要写两个参数，第二个参数可以随便乱写，不影响
+                    所以，两种浏览器都要兼容的写法，用if语句：
+                        【用到上节课学的什么是真的，什么是假】
+                        if(oDiv.currentStyle) {
+                            //ie
+                            
+                        }
+                        else {
+                            //ff
+                        }
+
+                    这里写封装这个函数：我也不是很懂这个意思
+                    <script>
+                        function getStyle(obj, name) {
+                            if(obj.currentStyle) {
+                                return boj.currentStyle[name];
+                            }
+                            else {
+                                return getComputedStyle(obj, false)[name];
+                            }
+                        }
+                        // 调用上面封装的这个函数：
+                        window.onload=function() {
+                            var oDiv=document.getElementById('div');    //这个是上面的，如果没有，就当是假设的div
+                            alert(getStyle(oDiv, 'width'));
+                        }
+                    </script>
+                 写法：
+                obj.currentStyle[attr]
+                getComputeedStyle(obj,false)[attr]
+        数组：
+        定义数组的方法：
+            var a=[1, 2, 3];    //第一种
+            var a=new Array(1, 2, 3)    //第二种
+        数组的属性，就一个length
+            数组的length不仅可以读，还可以写：应用就是可以清空数组
+        数组的添加,删除元素：
+            <script>
+                var arr=[1, 2, 3];
+                arr.push(4);        //alert(arr)出来的会是1，2，3，4
+                /* 
+                    push:表示的是在数组的末尾添加一个元素
+                    pop:表示在数组的末尾删除一个元素
+                    shift:表示在数组的头部删除一个元素
+                    unshift:表示在数组的头部添加一个元素
+                    在中间添加删除元素:数组的万能操作:splice
+                    splice(起点,长度)   写法参数
+                        删除元素的写法:splice(2, 3) 从第二个元素开始删除3个元素
+                        添加元素的写法:splice(2, 0, 4, 5) 从第二个元素开始删除0个元素,然后添加4和5
+                        替换元素的写法:splice(2, 2, 4, 5) 从第二个元素开始删除2个元素,然后添加4和5,这样就达成了替换的效果
+                 */
+            </script>
+        数组的链接:
+            concat:
+            <script>
+                var a=[1, 2, 3];
+                var b=[4, 5, 6];
+                // alert(a.concat(b));     //弹出的会是1,2,3,4,5,6
+                alert(b.concat(a));         //弹出的会是4,5,6,1,2,3
+            </script>
+            join:
+            <script>
+                var arr=[1, 2, 3]
+                alert(arr.join('-'));       //那么弹出的会是1-2-3      
+            </script>
+        数组的排序:
+            <script>
+                var arr=['float','width','alpha','zoom','left'];
+                arr.sort();
+                alert(arr);     //弹出的会是按照首字母的a-z排列这几个单词
+            </script>
+            <!-- 排数组会有一个问题 -->
+            <script>
+                var arr=[12, 8, 99, 112];
+                arr.sort();
+                alert(arr);     //弹出的会是112, 12, 8, 99; 这就是问题的所在
+                /* 
+                    解决方法:sort只认识字符串
+                    sort可以有一个参数,是一个函数(比较函数)
+                        
+                        arr.sort(function(n1, n2) {
+                            if(n1<n2) {
+                                return -1;      //这里可以是任何的负数
+                            }
+                            if else(n1>n2) {
+                                return 1;       //这里可以是任何的正数
+                            }
+                            else {
+                                return 0;
+                            }
+                        });
+                    简化上面的比较函数:
+                        arr.sort(function(n1, n2) {
+                            return n1-n2
+                            });
+
+                 */
+            </script>
+    </textarea>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用for或者说循环来获取数组里面的元素</title>
+    <style>
+        div {
+            position: relative; float: left; 
+            width: 50px; height: 50px; margin: 10px;
+            border: 1px solid black;
+        }
+        input {
+            position: relative; float: left; margin-left: 10px;
+        }
+
+        textarea {
+            position: relative;float: left;clear: both;
+        }
+        br {
+            position: relative; float: left; clear: both;
+        }
+
+        #u1 {
+            display: block; 
+        }
+    </style>
+    <script>
+        window.onload=function() {
+
+            var aDiv=document.getElementsByTagName('div');
+            for(var i=0; i<aDiv.length; i++) {
+                aDiv[i].style.backgroundColor='red';
+            };
+
+            var oBtn1=document.getElementById('btn1');  //选出按钮，为了加事件（全选按钮）
+            var oBtn2=document.getElementById('btn2');  //选出按钮，为了加事件（全不选按钮）
+            var oBtn3=document.getElementById('btn3');  //选出按钮，为了加事件（反选按钮）            
+            var oUl=document.getElementById('u1');  //为了不干扰最上面的input，建立的一个ul盒子
+            var aCh=oUl.getElementsByTagName('input');  //选出所有的input，是一个数组
+            oBtn1.onclick=function() {      //给按钮加事件
+                for(var i=0; i<aCh.length; i++) {   //写循环
+                    aCh[i].checked=true;        //让复选框被选中的写法，就是checked属性为true；
+                };
+            };
+            oBtn2.onclick=function() {
+                for(var i=0; i<aCh.length; i++) {
+                    aCh[i].checked=false;
+                };
+            };
+            oBtn3.onclick=function() {
+                for(var i=0; i<aCh.length; i++) {
+                    if(aCh[i].checked==true) {      //如果之前被选择的
+                        aCh[i].checked=false;       //那么就不选
+                    }
+                    else{
+                        aCh[i].checked=true;
+                    }
+                }
+            }
+        }
+
+       
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <br>
+    <input id="btn1" type="button" value="全选">
+    <input id="btn2" type="button" value="全不选">
+    <input id="btn3" type="button" value="反选">
+    
+    <br>
+    <ul id="u1">
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+        <input type="checkbox"> 
+    </ul>
+    <textarea name="" id="" cols="120" rows="45">
+    1.给全部的div背景改为红色：
+        代码：代码其实非常的简单
+            <script>
+                window.onload=function() {
+                    var aDiv=document.getElementsByTagName('div');
+                    for(var i=0; i<aDiv.length; i++) {
+                        aDiv[i].style.backgroundColor='red';
+                    }
+                }
+            </script>
+    2.实现全选、全不选、反选按钮：
+        全部代码：
+        <script>
+            window.onload=function() {
+            
+                var oBtn1=document.getElementById('btn1');  //选出按钮，为了加事件（全选按钮）
+                var oBtn2=document.getElementById('btn2');  //选出按钮，为了加事件（全不选按钮）
+                var oBtn3=document.getElementById('btn3');  //选出按钮，为了加事件（反选按钮）            
+                var oUl=document.getElementById('u1');  //为了不干扰最上面的input，建立的一个ul盒子
+                var aCh=oUl.getElementsByTagName('input');  //选出所有的input，是一个数组
+                oBtn1.onclick=function() {      //给按钮加事件
+                    for(var i=0; i<aCh.length; i++) {   //写循环
+                        aCh[i].checked=true;        //让复选框被选中的写法，就是checked属性为true；
+                    };
+                };
+                oBtn2.onclick=function() {
+                    for(var i=0; i<aCh.length; i++) {
+                        aCh[i].checked=false;
+                    };
+                };
+                oBtn3.onclick=function() {
+                    for(var i=0; i<aCh.length; i++) {
+                        if(aCh[i].checked==true) {      //如果之前被选择的
+                            aCh[i].checked=false;       //那么就不选
+                        }
+                        else{
+                            aCh[i].checked=true;
+                        }
+                    }
+                }
+            }
+        </script>
+        <body>
+            <input id="btn1" type="button" value="全选">
+            <input id="btn2" type="button" value="全不选">
+            <input id="btn3" type="button" value="反选">
+            
+            <br>
+            <ul id="u1">
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+                <input type="checkbox"> 
+            </ul>
+        </body>
+        <style>
+            #u1 {
+                display: block; 
+            }
+            为了把ul变为块元素，主要是我这个里面设置div，在用div会影响，所以用ul来代替一下
+            还有就是要记住让checkedbox被选中的写法是checked = true；
+            还有true和false被称为布尔值；
+        </style>
+    </textarea>
+</body>
+</html>

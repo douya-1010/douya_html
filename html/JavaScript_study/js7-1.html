@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试一下window.onload</title>
+    <script>
+        window.onload=function() {
+            var oBtn=document.getElementById('btn1');
+            oBtn.onclick=function() {
+                alert('a');
+            };
+        };
+        
+    </script>
+</head>
+<body>
+    <input id="btn1" type="button" value="按钮">
+    <!-- 
+    <script>
+        var oBtn=document.getElementById('btn1');
+        oBtn.onclick=function() {
+            alert('a');
+        }
+
+    </script>
+     -->
+     <p>对的，当不加window.onload 的时候，会显示oBtn没有值，意思就是btn1没有找到</p>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript来制作导航条</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="">
+
+        <style>
+            #div1 div {
+                width: 300px; height: 400px;
+                background-color: gray;display: none;
+            }
+            .active {
+                background: red;
+            }
+        </style>
+        <script>
+            window.onload = function () {
+                var x=document.getElementById("div1");
+                var dBtn=x.getElementsByTagName("button");
+                var dDiv=x.getElementsByTagName("div");
+
+                for(var i=0;i<dBtn.length;i++) {//for这一步都是为了选择所有的按钮
+                    dBtn[i].douya=i;
+                    dBtn[i].onmouseover=function() {
+                        for(var i=0;i<dBtn.length;i++) {
+                            dBtn[i].className="";//dBtn[i]才是全部的按钮
+                            dDiv[i].style.display="none";
+                        }
+                        this.className="active";//当前事件，不能用来做div的
+                        dDiv[this.douya].style.display="block";
+                    };
+                    
+                }
+                
+                
+            }
+        </script>
+    </head>
+    <body>
+        <div id="div1">    
+            <button class="active">xinwen</button>
+            <button>yule</button>
+            <button>dianshi</button>
+            <div style="display:block">111</div>
+            <div>222</div>
+            <div>333</div>
+            
+        </div>
+        <textarea name="" id="" cols="130" rows="40">
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                        <title>JavaScript来制作导航条</title>
+                        <meta charset="utf-8">
+                        <link rel="stylesheet" href="">
+                
+                        <style>
+                            #div1 div {
+                                width: 300px; height: 400px;
+                                background-color: gray;display: none;
+                            }
+                            .active {
+                                background: red;
+                            }
+                        </style>
+                        <script>
+                            window.onload = function () {
+                                var x=document.getElementById("div1");
+                                var dBtn=x.getElementsByTagName("button");
+                                var dDiv=x.getElementsByTagName("div");
+                
+                                for(var i=0;i<dBtn.length;i++) {//for这一步都是为了选择所有的按钮
+                                    dBtn[i].douya=i;
+                                    dBtn[i].onmouseover=function() {
+                                        for(var i=0;i<dBtn.length;i++) {
+                                            dBtn[i].className="";//dBtn[i]才是全部的按钮
+                                            dDiv[i].style.display="none";
+                                        }
+                                        this.className="active";//当前事件，不能用来做div的
+                                        dDiv[this.douya].style.display="block";
+                                    };
+                                    
+                                }
+                                
+                                
+                            }
+                        </script>
+                    </head>
+                    <body>
+                        <div id="div1">    
+                            <button class="active">xinwen</button>
+                            <button>yule</button>
+                            <button>dianshi</button>
+                            <div style="display:block">111</div>
+                            <div>222</div>
+                            <div>333</div>
+                            
+                        </div>
+                    </body>
+                </html>
+        </textarea>
+            
+    </body>
+</html>
